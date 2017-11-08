@@ -37,16 +37,29 @@ class ALGraph
     class GEdge;
     struct AdjInfo
     {
-      GNode *node;
-      unsigned weight;
-      unsigned cost;
-      AdjInfo();
-      bool operator<(const AdjInfo& rhs) const;
-      bool operator>(const AdjInfo& rhs) const;
+        //GNode *node;
+        unsigned id; // 1..n
+        unsigned weight; 
+       
+        // helper var for Dijkstra's
+        unsigned cost;
+
+        //AdjInfo();
+
+        bool operator<(const AdjInfo& rhs) const {
+            return weight < rhs.weight;       
+        }
+
+        bool operator>(const AdjInfo& rhs) const {
+            return weight > rhs.weight;       
+        }
     };
-    
+
+    using ADJLIST = std::vector<std::vector<AdjInfo> >;
+
     // Other private fields and methods
-    ALIST alist_;
+    unsigned size_;
+    ADJLIST alist_;
 };
 
 #endif
